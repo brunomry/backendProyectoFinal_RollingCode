@@ -4,6 +4,8 @@ import "dotenv/config";
 import morgan from "morgan";
 import {fileURLToPath} from "url";
 import path from "path";
+import enrutadorProductos from "./src/routes/productos.routes.js";
+import "./src/database/database.js";
 
 const app = express(); 
 app.set("port", process.env.PORT || 4000);
@@ -20,3 +22,5 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 app.use(express.static(path.join(__dirname, "/public")))
+
+app.use("/api", enrutadorProductos);

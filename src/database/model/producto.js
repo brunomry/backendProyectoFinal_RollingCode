@@ -29,4 +29,9 @@ const productoSchema = new Schema({
     required: true,
     enum: ["pizzas","hamburguesas","empanadas","pastas"]
   },
+  estado:{
+    type: String,
+    required: true,
+    enum: ["Disponible","No disponible"]
+  }
 });

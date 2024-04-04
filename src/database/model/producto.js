@@ -14,4 +14,8 @@ const productoSchema = new Schema({
         min: 3500,
         max: 10000,
     },
+    imagen:{
+        type: String,
+        required: true,
+    }
 })

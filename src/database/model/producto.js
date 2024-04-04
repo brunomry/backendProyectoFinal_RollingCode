@@ -35,3 +35,7 @@ const productoSchema = new Schema({
     enum: ["Disponible","No disponible"]
   }
 });
+
+const Producto = mongoose.model("producto", productoSchema);
+
+export default Producto;

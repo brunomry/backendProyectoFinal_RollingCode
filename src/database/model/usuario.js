@@ -6,7 +6,7 @@ const usuarioSchema = new Schema({
         type: String,
         required: true,
         unique: false,
-        minLength: 20,
+        minLength: 7,
         maxLength: 60
     },
     correo:{
@@ -14,9 +14,9 @@ const usuarioSchema = new Schema({
         required: true,
         unique: true,
         minLength: 13,
-        maxLength: 35
+        maxLength: 265
     },
-    contrasenia:{
+    clave:{
         type: String,
         required: true,
         unique: false,

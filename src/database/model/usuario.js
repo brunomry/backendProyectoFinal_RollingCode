@@ -7,13 +7,13 @@ const usuarioSchema = new Schema({
         required: true,
         unique: false,
         minLength: 7,
-        maxLength: 60
+        maxLength: 30
     },
     correo:{
         type: String,
         required: true,
         unique: true,
-        minLength: 13,
+        minLength: 3,
         maxLength: 265
     },
     clave:{
@@ -21,7 +21,7 @@ const usuarioSchema = new Schema({
         required: true,
         unique: false,
         minLength: 8,
-        maxLength:50
+        maxLength:16
     },
     estado:{
         type: Boolean,

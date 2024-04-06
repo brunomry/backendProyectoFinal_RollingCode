@@ -1,12 +1,12 @@
-import mongoose, { Schema } from "mongoose";
+import mongoose, { Schema } from 'mongoose';
 
 const productoSchema = new Schema({
   nombre: {
     type: String,
     required: true,
     unique: true,
-    minLength: 5,
-    maxLength: 25
+    minLength: 10,
+    maxLength: 25,
   },
   precio: {
     type: Number,
@@ -18,16 +18,16 @@ const productoSchema = new Schema({
     type: String,
     required: true
   },
-  descripcion: {
+  detalle: {
     type: String,
     required: true,
     minLength: 10,
     maxLength: 50
   },
-  categoria:{
+  categoria: {
     type: String,
     required: true,
-    enum: ["pizzas","hamburguesas","empanadas","pastas"]
+    enum: ['Pizzas', 'Hamburguesas', 'Empanadas', 'Pastas'],
   },
   estado:{
     type: String,

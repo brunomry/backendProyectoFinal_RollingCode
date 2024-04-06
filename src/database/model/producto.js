@@ -12,30 +12,30 @@ const productoSchema = new Schema({
     type: Number,
     required: true,
     min: 3500,
-    max: 10000,
+    max: 10000
   },
   imagen: {
     type: String,
-    required: true,
+    required: true
   },
   detalle: {
     type: String,
     required: true,
     minLength: 10,
-    maxLength: 50,
+    maxLength: 50
   },
   categoria: {
     type: String,
     required: true,
     enum: ['Pizzas', 'Hamburguesas', 'Empanadas', 'Pastas'],
   },
-  estado: {
+  estado:{
     type: String,
     required: true,
-    enum: ['Disponible', 'No disponible'],
-  },
+    enum: ["Disponible","No disponible"]
+  }
 });
 
-const Producto = mongoose.model('producto', productoSchema);
+const Producto = mongoose.model("producto", productoSchema);
 
 export default Producto;

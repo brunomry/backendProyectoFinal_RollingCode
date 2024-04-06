@@ -18,7 +18,7 @@ const productoSchema = new Schema({
     type: String,
     required: true
   },
-  descripcion: {
+  detalle: {
     type: String,
     required: true,
     minLength: 10,

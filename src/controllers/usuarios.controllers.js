@@ -4,7 +4,7 @@ export const crearUsuario = async (req, res) => {
   try {
     const valCorreo =
       /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/i;
-    const { nombreCompleto, correo, clave } = req.body;
+    const { nombreCompleto, correo, clave, rol } = req.body;
     if (valCorreo.test(correo)) {
       const correoVerificacion = await Usuario.findOne({ correo: correo });
       if (correoVerificacion) {
@@ -17,6 +17,7 @@ export const crearUsuario = async (req, res) => {
           correo: correo,
           clave: clave,
           estado: true,
+          rol: rol,
         });
         crearUsuario.save();
         res.status(200).json({

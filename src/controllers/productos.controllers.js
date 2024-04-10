@@ -50,9 +50,7 @@ export const borrarProducto = async (req, res) => {
         mensaje: 'No se encontró el producto. El id es incorrecto.',
       });
     }
-
     await Producto.findByIdAndDelete(req.params.id, req.body);
-
     res.status(200).json({
       mensaje: 'El producto fue eliminado con éxito.',
     });

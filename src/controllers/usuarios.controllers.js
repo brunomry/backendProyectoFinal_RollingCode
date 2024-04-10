@@ -45,7 +45,7 @@ export const login = async (req, res) => {
       });
     }
 
-    const claveValida = await Usuario.findOne({ clave });
+    const claveValida = bcrypt.compareSync(clave, usuarioBuscado.clave)
 
     if (!claveValida) {
       return res.status(400).json({

@@ -8,7 +8,7 @@ const validacionLogin = [
     .isLength({ min: 3, max: 265 })
     .withMessage("El correo debe contener entre 3 y 265 carácteres")
     .matches(/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/)
-    .withMessage("El correo debe contener un formato válido"),
+    .withMessage("El correo debe contener un formato válido. Ej: nombre@correo.com"),
   check("clave")
     .notEmpty()
     .withMessage("La clave del usuario es obligatoria")

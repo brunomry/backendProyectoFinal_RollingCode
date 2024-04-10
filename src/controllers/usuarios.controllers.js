@@ -1,5 +1,6 @@
 import Usuario from "../database/model/usuario.js";
 import bcrypt from "bcrypt";
+import generarJWT from "../helpers/generarJWT.js";
 
 export const crearUsuario = async (req, res) => {
   try {
@@ -45,7 +46,7 @@ export const login = async (req, res) => {
       });
     }
 
-    const claveValida = bcrypt.compareSync(clave, usuarioBuscado.clave)
+    const claveValida = bcrypt.compareSync(clave, usuarioBuscado.clave);
 
     if (!claveValida) {
       return res.status(400).json({
@@ -53,9 +54,17 @@ export const login = async (req, res) => {
       });
     }
 
+    const token = await generarJWT(
+      usuarioBuscado._id,
+      usuarioBuscado.correo,
+      usuarioBuscado.rol,
+      usuarioBuscado.nombreCompleto
+    );
+
     res.status(200).json({
       mensaje: "Los datos del usuario son correctos",
       correo: correo,
+      token: token,
     });
   } catch (error) {
     console.error(error);

@@ -39,3 +39,27 @@ export const crearProducto = async (req, res) => {
     });
   }
 };
+
+export const borrarProducto = async (req, res) => {
+  try {
+    const productoEncontrado = await Producto.findById(req.params.id);
+
+    if(!productoEncontrado){
+      res.status(404).json({
+        mensaje: "No se encontró el producto. El id es incorrecto."
+      })
+    }
+
+    await Producto.findByIdAndDelete(req.params.id, req.body);
+
+    res.status(200).json({
+      mensaje:"El producto fue eliminado con éxito."
+    })
+
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      mensaje:"Ocurrió un error al intentar borrar el producto."
+    })
+  }
+}

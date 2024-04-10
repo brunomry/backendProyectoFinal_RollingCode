@@ -1,4 +1,5 @@
 import Usuario from "../database/model/usuario.js";
+import bcrypt from "bcrypt";
 
 export const crearUsuario = async (req, res) => {
   try {
@@ -9,10 +10,12 @@ export const crearUsuario = async (req, res) => {
         mensaje: "Este correo ya se encuentra registrado.",
       });
     } else {
+      const saltos = bcrypt.genSaltSync(10);
+      const claveEncriptada = bcrypt.hashSync(clave, saltos);
       const crearUsuario = new Usuario({
         nombreCompleto: nombreCompleto,
         correo: correo,
-        clave: clave,
+        clave: claveEncriptada,
         estado: true,
         rol: rol,
       });

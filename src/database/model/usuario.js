@@ -25,14 +25,7 @@ const usuarioSchema = new Schema({
     type: String,
     required: true,
     unique: false,
-    minLength: 8,
-    maxLength: 16,
-    validate: {
-      validator: function (v){
-        return /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/.test(v);
-      },
-      message: props => "La clave debe contener al menos una letra mayúscula y una letra minúscula"
-    }
+    minLength: 8
   },
   estado: {
     type: Boolean,

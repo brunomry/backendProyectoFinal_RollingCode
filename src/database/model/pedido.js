@@ -11,7 +11,7 @@ const pedidoSchema = new Schema({
     type: Number,
     required: true,
   },
-  productos: [{ type: Schema.Types.ObjectId, ref: 'producto' }],
+  productos: { type: Array, require: true },
   metodoEnvio: {
     type: Number,
     required: true,

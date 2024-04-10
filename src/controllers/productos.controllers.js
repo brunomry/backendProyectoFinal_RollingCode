@@ -63,3 +63,12 @@ export const borrarProducto = async (req, res) => {
     })
   }
 }
+
+export const editarProducto = async(req, res)=>{
+  try {
+    
+  } catch (error) {
+    console.error(error)
+    res.status(500).json({mensaje:"Ocurrio un error al intentar editar el producto"})
+  }
+}

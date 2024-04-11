@@ -14,13 +14,18 @@ const usuarioSchema = new Schema({
     unique: true,
     minLength: 3,
     maxLength: 265,
+    validate: {
+      validator: function(v){
+        return /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/.test(v);
+      },
+      message: props => "debe ingresar un correo válido. Ej nombre@correo.com"
+    }
   },
   clave: {
     type: String,
     required: true,
     unique: false,
-    minLength: 8,
-    maxLength: 16,
+    minLength: 8
   },
   estado: {
     type: Boolean,

@@ -70,3 +70,12 @@ export const login = async (req,res) => {
     });
   }
 }
+
+export const obtenerUsuario = async (req, res)=>{
+  try {
+    
+  } catch (error) {
+    console.error(error);
+    res.status(404).json({mensaje:"Ocurrio un error al realizar la solicitud"})
+  }
+}

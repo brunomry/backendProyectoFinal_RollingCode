@@ -37,34 +37,31 @@ Este proyecto de Backend se integró a su proyecto Frontend correspondiente.
 
 ## Tecnologías Utilizadas
 
-- [Node.js](https://nodejs.org/en/learn/getting-started/introduction-to-nodejs): Un entorno de ejecución de JavaScript que permite ejecutar código JavaScript en el servidor. Es ideal para construir aplicaciones web y APIs.
+<a href="https://developer.mozilla.org/es/docs/Web/JavaScript"><img src="https://img.icons8.com/color/48/000000/javascript--v1.png" alt="JavaScript (ES6+)" title="JavaScript (ES6+)" width="48" height="48"/></a>
+<a href="https://nodejs.org/"><img src="https://cdn.icon-icons.com/icons2/2415/PNG/512/nodejs_plain_logo_icon_146409.png" alt="Node.js"   title="Node js" width="50"></a>
+<a href="https://www.mongodb.com/"><img src="https://cdn.icon-icons.com/icons2/2415/PNG/512/mongodb_original_wordmark_logo_icon_146425.png" alt="MongoDB" title="MongoDB" width="60"></a>
+<a href="https://mongoosejs.com/"><img src="https://mongoosejs.com/docs/images/mongoose5_62x30_transparent.png" alt="Mongoose" title="Mongoose" width="75"></a>
 
-- [Express.js](https://expressjs.com/es/): Es un marco de aplicación web de Node.js minimalista y flexible que proporciona un conjunto robusto de características para desarrollar aplicaciones web y APIs de manera rápida y sencilla.
+  * ### Otras:
 
-- [MongoDB](https://www.mongodb.com/es): Una base de datos NoSQL que utiliza documentos JSON para almacenar datos. Es escalable y flexible, ideal para aplicaciones que manejan grandes volúmenes de datos y requieren un esquema dinámico.
-
-- [Mongoose](https://mongoosejs.com/): Una biblioteca de modelado de objetos MongoDB para Node.js que proporciona una solución simple pero potente para trabajar con MongoDB. Facilita la definición de modelos, esquemas y la interacción con la base de datos.
-
-- [JavaScript](https://developer.mozilla.org/es/docs/Web/JavaScript): El lenguaje de programación fundamental para el desarrollo web. En el contexto de del proyecto, se utiliza tanto en el lado del servidor (Node.js) como en el lado del cliente.
-
-- [Express-validator](https://express-validator.github.io/docs/guides/getting-started): Un middleware de Express.js que proporciona funciones para validar y sanitizar datos de entrada en las solicitudes HTTP, lo cual es crucial para garantizar la seguridad y la integridad de los datos en una aplicación web.
-
-- [bcrypt](https://www.npmjs.com/package/bcrypt): Una biblioteca de cifrado de contraseñas que se utiliza para almacenar de manera segura las contraseñas en la base de datos. Utiliza un algoritmo de hashing irreversible que hace que sea difícil descifrar las contraseñas incluso si la base de datos es comprometida.
+    - [Express js](https://expressjs.com/es/)
+    - [Express-validator](https://express-validator.github.io/docs/guides/getting-started)
+    - [bcrypt](https://www.npmjs.com/package/bcrypt)
 
 ## Endpoints API
 
 - /api/productos
-    * descripción
+    * Endpoint para gestionar productos del restaurante, incluyendo la visualización y creación (POST) de productos.
 - /api/producto/:id
-    * descripción
+    * Endpoint para obtener información detallada de un producto específico y también para editar (PUT) o eliminar (DELETE) dicho producto.
 - /api/login
-    * descripción
+    * Endpoint para autenticar usuarios y obtener un token de acceso.
 - /api/registro
-    * descripción
+    * Endpoint para registrar nuevos usuarios en la aplicación.
 - /api/pedidos
-    * descripción
+    * Endpoint para visualizar la lista de pedidos realizados por los usuarios.
 - /api/pedido/:id
-    * descripción
+    * Endpoint para obtener información detallada de un pedido específico y para actualizar (PUT) su estado.
 
 ## Requisitos previos
 

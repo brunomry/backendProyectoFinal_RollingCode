@@ -4,6 +4,6 @@ import { crearPedido } from "../controllers/pedidos.controllers";
 
 const enrutador = Router();
 
-enrutador.route('/pedidos').get(crearPedido);
+enrutador.route('/pedidos').post(crearPedido);
 
 export default enrutador;

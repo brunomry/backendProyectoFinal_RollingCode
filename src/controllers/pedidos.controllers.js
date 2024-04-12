@@ -26,7 +26,7 @@ export const editarPedido = async (req,res) => {
       })
     }
 
-    await Pedido.findByIdAndUpdate(req.params,req.body);
+    await Pedido.findByIdAndUpdate(req.params.id,req.body);
     res.status(200).json({
       mensaje:"El estado del Pedido fue modificado con éxito"
     })

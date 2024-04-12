@@ -7,6 +7,7 @@ import path from 'path';
 import enrutadorProductos from './src/routes/productos.routes.js';
 import enrutadorUsuarios from './src/routes/usuarios.routes.js';
 import './src/database/database.js';
+import enrutadorPedidos from './src/routes/pedidos.routes.js';
 
 const app = express();
 app.set('port', process.env.PORT || 4000);
@@ -26,3 +27,4 @@ app.use(express.static(path.join(__dirname, '/public')));
 
 app.use('/api', enrutadorProductos);
 app.use('/api', enrutadorUsuarios);
+app.use('/api', enrutadorPedidos);

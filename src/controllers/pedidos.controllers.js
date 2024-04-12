@@ -1,3 +1,5 @@
+import Pedido from "../database/model/pedido.js";
+
 export const crearPedido = async (req, res) => {
     try {
       const nuevoPedido = await Pedido(req.body);

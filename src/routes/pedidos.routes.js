@@ -1,6 +1,5 @@
 import { Router } from "express";
-import { crearPedido } from "../controllers/pedidos.controllers";
-
+import { crearPedido } from "../controllers/pedidos.controllers.js";
 
 const enrutador = Router();
 

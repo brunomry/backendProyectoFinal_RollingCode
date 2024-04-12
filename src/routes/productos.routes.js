@@ -12,6 +12,6 @@ import validacionProducto from '../helpers/validacionDeProductos.js';
 const enrutador = Router();
 
 enrutador.route('/productos').get(listarProductos).post([validacionProducto],crearProducto);
-enrutador.route('/producto/:id').get(obtenerProducto).delete(borrarProducto);
+enrutador.route('/producto/:id').get(obtenerProducto).delete(borrarProducto).put(editarProducto);
 
 export default enrutador;

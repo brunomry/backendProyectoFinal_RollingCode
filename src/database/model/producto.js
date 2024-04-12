@@ -17,6 +17,12 @@ const productoSchema = new Schema({
   imagen: {
     type: String,
     required: true,
+    validate: {
+      validator: function(v){
+        return /(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|jpeg|gif|png)/.test(v);
+      },
+      message: props => "La imagen debe tener un formato de URL valida y terminar en jpg|jpeg|gif|png"
+    }
   },
   detalle: {
     type: String,

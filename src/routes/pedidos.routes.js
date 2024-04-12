@@ -1,8 +1,8 @@
 import { Router } from "express";
-import { crearPedido } from "../controllers/pedidos.controllers.js";
-
+import { crearPedido, obtenerPedido, obtenerPedidos } from "../controllers/pedidos.controllers.js";
 const enrutador = Router();
 
-enrutador.route('/pedidos').post(crearPedido);
+enrutador.route('/pedidos').post(crearPedido).get(obtenerPedidos);
+enrutador.route('/pedido/:id').post(crearPedido).get(obtenerPedido);
 
 export default enrutador;

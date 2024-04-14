@@ -74,7 +74,7 @@ export const login = async (req, res) => {
   }
 };
 
-export const obtenerUsuario = async (req, res) => {
+export const obtenerUsuarios = async (req, res) => {
   try {
     const listaUsuarios = await Usuario.find();
     res.status(200).json(listaUsuarios);

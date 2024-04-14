@@ -47,6 +47,8 @@ Este proyecto de Backend se integró a su proyecto Frontend correspondiente.
     - [Express js](https://expressjs.com/es/)
     - [Express-validator](https://express-validator.github.io/docs/guides/getting-started)
     - [bcrypt](https://www.npmjs.com/package/bcrypt)
+    - [JWT](https://jwt.io/)
+    - [NodeMailer](https://www.nodemailer.com/)
 
 ## Endpoints API
 
@@ -62,6 +64,8 @@ Este proyecto de Backend se integró a su proyecto Frontend correspondiente.
     * Endpoint para visualizar la lista de pedidos realizados por los usuarios.
 - /api/pedido/:id
     * Endpoint para obtener información detallada de un pedido específico y para actualizar (PUT) su estado.
+- /api/mailer
+    * Endpoit para enviar correos de confirmacion a los usuarios registrados.
 
 ## Requisitos previos
 

@@ -23,11 +23,6 @@ const validacionRegistro = [
     .withMessage(
       "La clave debe tener al menos una letra minúscula y una letra mayúscula"
     ),
-    check("rol")
-    .notEmpty()
-    .withMessage("El rol del usuario es obligatorio")
-    .matches("Usuario")
-    .withMessage("El rol debe ser Usuario"),
   (req, res, next) => {
     resultadoValidacion(req, res, next);
   },

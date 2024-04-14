@@ -11,7 +11,7 @@ const validarJWT = (req, res, next) => {
   }
   try {
     const payload = jwt.verify(token, process.env.SECRET_JWT);
-    req._id = payload.id;
+    req._id = payload._id;
     req.correo = payload.correo;
     req.rol = payload.rol;
     req.nombreCompleto = payload.nombreCompleto;

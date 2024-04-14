@@ -93,15 +93,12 @@ export const editarUsuario = async (req, res) => {
       return res.status(404).json({
         mensaje: 'El usuario no fue encontrado.',
       });
-    } else {
-      await Usuario.updateOne(
-        { _id: buscarUsuario._id },
-        { $set: { estado: req.body.estado } }
-      );
-      res
-        .status(200)
-        .json({ mensaje: 'El usuario fue actualizado con exito.' });
     }
+    await Usuario.updateOne(
+      { _id: buscarUsuario._id },
+      { $set: { estado: req.body.estado } }
+    );
+    res.status(200).json({ mensaje: 'El usuario fue actualizado con exito.' });
   } catch (error) {
     console.log(error);
     res

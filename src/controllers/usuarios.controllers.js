@@ -18,7 +18,7 @@ export const crearUsuario = async (req, res) => {
         correo: correo,
         clave: claveEncriptada,
         estado: true,
-        rol: rol,
+        rol: "Usuario",
       });
       crearUsuario.save();
       res.status(201).json({

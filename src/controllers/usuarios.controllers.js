@@ -4,7 +4,7 @@ import generarJWT from '../helpers/generarJWT.js';
 
 export const crearUsuario = async (req, res) => {
   try {
-    const { nombreCompleto, correo, clave, rol } = req.body;
+    const { nombreCompleto, correo, clave } = req.body;
     const correoVerificacion = await Usuario.findOne({ correo: correo });
     if (correoVerificacion) {
       res.status(400).json({

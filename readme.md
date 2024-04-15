@@ -65,7 +65,9 @@ Este proyecto de Backend se integró a su proyecto Frontend correspondiente.
 - /api/pedido/:id
     * Endpoint para obtener información detallada de un pedido específico y para actualizar (PUT) su estado.
 - /api/mailer
-    * Endpoit para enviar correos de confirmacion a los usuarios registrados.
+    * Endpoint para enviar correos de confirmacion a los usuarios registrados.
+- /api/usuarios
+    * Endpoint para editar el estado de los usuarios registrados.
 
 ## Requisitos previos
 

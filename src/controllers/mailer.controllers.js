@@ -12,7 +12,7 @@ export const enviarCorreo = async (req, res) => {
   console.log(template);
   const { correo } = req.body;
   try {
-    const resultado = await transporter.sendMail({
+    const resultado = transporter.sendMail({
       from: `AmbienteBohemio ${process.env.EMAIL}`,
       to: correo,
       subject: "Registro Ambiente Bohemio",

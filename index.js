@@ -16,11 +16,8 @@ app.listen(app.get('port'), () => {
   console.log('Estoy en el puerto ' + app.get('port'));
 });
 
-app.use(cors({
-  origin: 'https://ambientebohemio-dev.netlify.app',
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
-  allowedHeaders: ['*']
-}));
+
+app.use(cors());
 app.use(morgan());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

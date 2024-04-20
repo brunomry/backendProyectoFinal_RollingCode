@@ -9,6 +9,7 @@ import enrutadorUsuarios from './src/routes/usuarios.routes.js';
 import './src/database/database.js';
 import enrutadorPedidos from './src/routes/pedidos.routes.js';
 import enrutadorMailer from "./src/routes/mailer.routes.js"
+import enrutadorMercadoPago from './src/routes/mercadoPago.routes.js'
 
 const app = express();
 app.set('port', process.env.PORT || 4000);
@@ -31,3 +32,4 @@ app.use('/api', enrutadorProductos);
 app.use('/api', enrutadorUsuarios);
 app.use('/api', enrutadorPedidos);
 app.use('/api', enrutadorMailer);
+app.use('/api', enrutadorMercadoPago)

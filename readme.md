@@ -66,8 +66,12 @@ Este proyecto de Backend se integró a su proyecto Frontend correspondiente.
     * Endpoint para obtener información detallada de un pedido específico y para actualizar (PUT) su estado.
 - /api/mailer
     * Endpoint para enviar correos de confirmacion a los usuarios registrados.
-- /api/usuarios
+- /api/usuario
     * Endpoint para editar el estado de los usuarios registrados.
+- /api/crearusuario
+    * Endpoint para crear nuevos usuarios en la aplicación.
+- /api/create-order
+    * Endpoint para realizar pago de pedidos mediante mercadopago.
 
 ## Requisitos previos
 

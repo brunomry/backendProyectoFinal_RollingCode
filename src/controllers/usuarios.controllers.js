@@ -109,3 +109,35 @@ export const editarUsuario = async (req, res) => {
       .json({ mensaje: 'Ocurrio un error al intentar editar el usuario.' });
   }
 };
+
+export const crearUsuarioAdmin = async (req, res) => {
+  try {
+    const { nombreCompleto, correo, clave, rol} = req.body;
+    const correoVerificacion = await Usuario.findOne({ correo: correo });
+    if (correoVerificacion) {
+      res.status(400).json({
+        mensaje: 'Este correo ya se encuentra registrado.',
+      });
+    } else {
+      const saltos = bcrypt.genSaltSync(10);
+      const claveEncriptada = bcrypt.hashSync(clave, saltos);
+      const crearUsuario = new Usuario({
+        nombreCompleto: nombreCompleto,
+        correo: correo,
+        clave: claveEncriptada,
+        estado: true,
+        rol: rol,
+      });
+      crearUsuario.save();
+      res.status(201).json({
+        mensaje: 'Usuario creado correctamente.',
+        Usuario: crearUsuario,
+      });
+    }
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      mensaje: 'Error interno del servidor.',
+    });
+  }
+};

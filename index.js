@@ -10,6 +10,7 @@ import './src/config/database.js';
 import enrutadorPedidos from './src/routes/pedidos.routes.js';
 import enrutadorMailer from "./src/routes/mailer.routes.js"
 import enrutadorMercadoPago from './src/routes/mercadoPago.routes.js'
+import enrutadorAuth from './src/routes/auth.routes.js';
 
 const app = express();
 app.set('port', process.env.PORT || 4000);
@@ -29,6 +30,7 @@ app.use(express.static(path.join(__dirname, '/public')));
 
 app.use('/api', enrutadorProductos);
 app.use('/api', enrutadorUsuarios);
+app.use('/api', enrutadorAuth);
 app.use('/api', enrutadorPedidos);
 app.use('/api', enrutadorMailer);
 app.use('/api', enrutadorMercadoPago)

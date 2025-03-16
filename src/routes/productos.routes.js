@@ -6,7 +6,7 @@ import {
   borrarProducto,
   editarProducto,
 } from '../controllers/productos.controller.js';
-import validacionProducto from '../helpers/validacionDeProductos.js';
+import validacionProducto from '../validations/productos.validations.js';
 import validarJWT from '../helpers/verificarJWT.js';
 
 const enrutador = Router();

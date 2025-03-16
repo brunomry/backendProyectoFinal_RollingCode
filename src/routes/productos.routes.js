@@ -5,7 +5,7 @@ import {
   crearProducto,
   borrarProducto,
   editarProducto,
-} from '../controllers/productos.controllers.js';
+} from '../controllers/productos.controller.js';
 import validacionProducto from '../helpers/validacionDeProductos.js';
 import validarJWT from '../helpers/verificarJWT.js';
 

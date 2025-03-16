@@ -1,4 +1,4 @@
-import Producto from "../database/model/producto.js"
+import Producto from "../models/producto.schema.js"
 
 export const listarProductos = async (req, res) =>{
     try{

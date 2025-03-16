@@ -6,7 +6,7 @@ import { fileURLToPath } from 'url';
 import path from 'path';
 import enrutadorProductos from './src/routes/productos.routes.js';
 import enrutadorUsuarios from './src/routes/usuarios.routes.js';
-import './src/database/database.js';
+import './src/config/database.js';
 import enrutadorPedidos from './src/routes/pedidos.routes.js';
 import enrutadorMailer from "./src/routes/mailer.routes.js"
 import enrutadorMercadoPago from './src/routes/mercadoPago.routes.js'
@@ -16,7 +16,6 @@ app.set('port', process.env.PORT || 4000);
 app.listen(app.get('port'), () => {
   console.log('Estoy en el puerto ' + app.get('port'));
 });
-
 
 app.use(cors());
 app.use(morgan());

@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { crearPreferenciaMP } from "../controllers/mercadoPago.controllers.js";
+import { crearPreferenciaMP } from "../controllers/mercadoPago.controller.js";
 
 const enrutador = Router();
 

@@ -67,8 +67,8 @@ export const login = async (req, res) => {
       correo,
       token
     }
-    
-    res.status(200).json(formatoRespuesta(true, "Usuario autenticado", { ...data}, null));
+
+    res.status(200).json(formatoRespuesta(true, "Usuario autenticado", data, null));
   } catch (error) {
     console.error(error);
     res.status(500).json(formatoRespuesta(false, 'Error interno del servidor', null, {

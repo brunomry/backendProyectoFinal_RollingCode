@@ -14,4 +14,5 @@ const generarJWT = async (correo)=>{
         throw new Error('No se pudo generar el token');
     }
 }
-export default generarJWT
+
+export default generarJWT;

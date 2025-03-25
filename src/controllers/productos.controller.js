@@ -1,56 +1,64 @@
 import Producto from "../models/producto.schema.js"
+import { formatoRespuesta } from "../utils/respuesta.util.js";
 
 export const listarProductos = async (req, res) =>{
     try{
-        const listaDeProductos = await Producto.find();
-        res.status(200).json(listaDeProductos);
-    }catch(error){
+        const productos = await Producto.find();
+        res.status(200).json(formatoRespuesta(true, "Lista de productos", productos, null));    
+      }catch(error){
         console.log(error);
-        res.status(404).json({
-            mensaje: "No se pudo conseguir la lista de productos"
-        })
+        res.status(404).json(formatoRespuesta(false, "No se pudo obtener la lista de productos", null,{
+          code:404,
+          details: error.message
+        }));
     }
 }
 
 export const obtenerProducto = async (req, res) => {
     try{
-        const productoBuscado = await Producto.findById(req.params.id);
-        res.status(200).json(productoBuscado);
+      const { id } = req.params;
+
+      const productoBuscado = await Producto.findById(id);
+
+      res.status(200).json(formatoRespuesta(true, "Producto encontrado", productoBuscado, null));
     }catch(error){
         console.log(error);
-        res.status(404).json({
-            mensaje: "El producto no existe o no pudo ser encontrado"
-        })
+        res.status(404).json(formatoRespuesta(false, "No se pudo encontrar el producto", null,{
+          code:404,
+          details: error.message
+        }));
     }
 }
 
 export const crearProducto = async (req, res) => {
   try {
     const nuevoProducto = new Producto(req.body);
+
     await nuevoProducto.save();
-    res.status(201).json({
-      mensaje: 'Producto creado correctamente.',
-      Producto: nuevoProducto,
-    });
+
+    res.status(201).json(formatoRespuesta(true, "El producto fue creado correctamente", nuevoProducto, null));
   } catch (error) {
     console.log(error);
-    res.status(400).json({
-      mensaje: 'No se pudo procesar la solicitud para crear un producto.',
-    });
+    res.status(500).json(formatoRespuesta(false, 'Error interno del servidor', null, {
+      code: 500,
+      details: error.message
+    }));
   }
 };
 
 export const borrarProducto = async (req, res) => {
   try {
-    const productoEncontrado = await Producto.findById(req.params.id);
+    const { id } = req.params;
+    const productoEncontrado = await Producto.findById(id);
 
     if(!productoEncontrado){
-      res.status(404).json({
-        mensaje: "No se encontró el producto. El id es incorrecto."
-      })
+      return res.status(404).json(formatoRespuesta(false, "No se pudo encontrar el producto.", null,{
+        code:404,
+        details: error.message
+      }));
     }
 
-    await Producto.findByIdAndDelete(req.params.id, req.body);
+    await Producto.findByIdAndDelete(id, req.body);
 
     res.status(200).json({
       mensaje:"El producto fue eliminado con éxito."
@@ -58,24 +66,34 @@ export const borrarProducto = async (req, res) => {
 
   } catch (error) {
     console.error(error);
-    res.status(500).json({
-      mensaje:"Ocurrió un error al intentar borrar el producto."
-    })
+    res.status(500).json(formatoRespuesta(false, 'Error interno del servidor', null, {
+      code: 500,
+      details: error.message
+    }));
   }
 }
 
 export const editarProducto = async(req, res)=>{
   try {
-    
-    const buscarProducto = await Producto.findById(req.params.id);
+    const { id } = req.params;
+    const buscarProducto = await Producto.findById(id);
+
     if(!buscarProducto){
-      return res.status(404).json({mensaje:"No se pudo editar el producto, el id es incorrecto."});
+      res.status(404).json(formatoRespuesta(false, "No se pudo encontrar el producto", null,{
+        code:404,
+        details: error.message
+      }));
     }
-    await Producto.findByIdAndUpdate(req.params.id, req.body);
-    res.status(200).json({mensaje:"El producto fue modificado exitosamente"});
+
+    await Producto.findByIdAndUpdate(id, req.body);
+
+    res.status(200).json(formatoRespuesta(true, "El producto fue modificado con éxito", null, null));
 
   } catch (error) {
     console.error(error)
-    res.status(500).json({mensaje:"Ocurrio un error al intentar editar el producto"});
+    res.status(500).json(formatoRespuesta(false, 'Error interno del servidor', null, {
+      code: 500,
+      details: error.message
+    }));
   }
 }

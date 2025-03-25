@@ -1,81 +1,94 @@
 import Usuario from "../models/usuario.schema.js";
+import { formatoRespuesta } from "../utils/respuesta.util.js";
 
 export const obtenerUsuarios = async (req, res) => {
   try {
-    const listaUsuarios = await Usuario.find();
-    res.status(200).json(listaUsuarios);
+    const usuarios = await Usuario.find();
+    res.status(200).json(formatoRespuesta(true, "Lista de productos", usuarios, null));      
   } catch (error) {
     console.error(error);
-    res
-      .status(404)
-      .json({ mensaje: 'Ocurrio un error al realizar la solicitud' });
+    res.status(404).json(formatoRespuesta(false, "No se pudo obtener la lista de usuarios", null,{
+      code:404,
+      details: error.message
+    }));
   }
 };
 
 export const obtenerUsuario = async (req,res) => {
   try {
-      const usuario = await Usuario.findById(req.params.id);
-      res.status(200).json(usuario);
+      const {id} = req.params;
+      const usuarioBuscado = await Usuario.findById(id);
+      res.status(200).json(formatoRespuesta(true, "Usuario encontrado", usuarioBuscado, null));
   } catch (error) {
       console.error(error);
-      return res.status(404).json({
-          mensaje: "No se pudo obtener el usuario"
-      })   
+      res.status(404).json(formatoRespuesta(false, "No se pudo encontrar el usuario", null,{
+        code:404,
+        details: error.message
+      })); 
   }
 }
 
 export const editarUsuario = async (req, res) => {
   try {
-    const buscarUsuario = await Usuario.findById(req.params.id);
-    if (!buscarUsuario) {
-      return res.status(404).json({
-        mensaje: 'El usuario no fue encontrado.',
-      });
-    } else {
-      await Usuario.updateOne(
-        { _id: buscarUsuario._id },
-        { $set: { estado: req.body.estado } }
-      );
-      res
-        .status(200)
-        .json({ mensaje: 'El usuario fue actualizado con exito.' });
+    const {id} = req.params;
+    const usuarioBuscado = await Usuario.findById(id);
+
+    if (!usuarioBuscado) {
+      res.status(404).json(formatoRespuesta(false, "No se pudo encontrar el usuario", null,{
+        code:404,
+        details: error.message
+      }));
     }
+ 
+    await Usuario.updateOne(
+      { _id: usuarioBuscado._id },
+      { $set: { estado: req.body.estado } }
+    );
+
+    res.status(200).json(formatoRespuesta(true, "El estado del usuario fue modificado con éxito", null, null));
+    
   } catch (error) {
     console.log(error);
-    res
-      .status(500)
-      .json({ mensaje: 'Ocurrio un error al intentar editar el usuario.' });
+    res.status(500).json(formatoRespuesta(false, 'Error interno del servidor', null, {
+      code: 500,
+      details: error.message
+    }));
   }
 };
 
 export const crearUsuarioAdmin = async (req, res) => {
   try {
     const { nombreCompleto, correo, clave, rol} = req.body;
+
     const correoVerificacion = await Usuario.findOne({ correo: correo });
+
     if (correoVerificacion) {
-      res.status(400).json({
-        mensaje: 'Este correo ya se encuentra registrado.',
-      });
-    } else {
-      const saltos = bcrypt.genSaltSync(10);
-      const claveEncriptada = bcrypt.hashSync(clave, saltos);
-      const crearUsuario = new Usuario({
+      res.status(400).json(formatoRespuesta(false, 'Este correo ya se encuentra registrado.', null, {
+        code: 400,
+        details: error.message
+      }));
+    } 
+
+    const saltos = bcrypt.genSaltSync(10);
+    const claveEncriptada = bcrypt.hashSync(clave, saltos);
+
+    const nuevoUsuario = new Usuario({
         nombreCompleto: nombreCompleto,
         correo: correo,
         clave: claveEncriptada,
         estado: true,
         rol: rol,
       });
-      crearUsuario.save();
-      res.status(201).json({
-        mensaje: 'Usuario creado correctamente.',
-        Usuario: crearUsuario,
-      });
-    }
+
+    nuevoUsuario.save();
+
+    res.status(201).json(formatoRespuesta(true, "El usuario admin fue creado correctamente", nuevoUsuario, null));
+    
   } catch (error) {
     console.log(error);
-    return res.status(500).json({
-      mensaje: 'Error interno del servidor.',
-    });
+    res.status(500).json(formatoRespuesta(false, 'Error interno del servidor', null, {
+      code: 500,
+      details: error.message
+    }));
   }
 };

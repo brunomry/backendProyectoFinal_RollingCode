@@ -3,12 +3,12 @@ import {
   crearUsuario,
   login
 } from '../controllers/auth.controller.js';
-import validacionRegistro from '../validations/registro.validations.js';
-import validacionLogin from '../validations/login.validations.js';
+import { loginValidaciones, registerValidaciones } from '../validations/auth.validations.js';
+import resultadoValidacion from '../middlewares/validaciones.middleware.js';
 
-const enrutador = Router();
+const routerAuth = Router();
 
-enrutador.route('/registro').post([validacionRegistro], crearUsuario);
-enrutador.route('/login').post([validacionLogin], login)
+routerAuth.route('/registro').post([registerValidaciones, resultadoValidacion], crearUsuario);
+routerAuth.route('/login').post([loginValidaciones, resultadoValidacion], login)
 
-export default enrutador;
+export default routerAuth;

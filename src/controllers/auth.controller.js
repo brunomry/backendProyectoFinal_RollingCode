@@ -1,36 +1,41 @@
 import Usuario from '../models/usuario.schema.js';
 import bcrypt from 'bcrypt';
 import generarJWT from '../helpers/generarJWT.js';
+import { formatoRespuesta } from "../utils/respuesta.util.js";
 
 export const crearUsuario = async (req, res) => {
   try {
     const { nombreCompleto, correo, clave } = req.body;
+
     const correoVerificacion = await Usuario.findOne({ correo: correo });
+
     if (correoVerificacion) {
-      res.status(400).json({
-        mensaje: 'Este correo ya se encuentra registrado.',
-      });
+      res.status(400).json(formatoRespuesta(false, 'Este correo ya se encuentra registrado.', null, {
+        code: 400,
+        details: error.message
+      }));
     } else {
       const saltos = bcrypt.genSaltSync(10);
       const claveEncriptada = bcrypt.hashSync(clave, saltos);
-      const crearUsuario = new Usuario({
+
+      const nuevoUsuario = new Usuario({
         nombreCompleto: nombreCompleto,
         correo: correo,
         clave: claveEncriptada,
         estado: true,
         rol: "Usuario",
       });
-      crearUsuario.save();
-      res.status(201).json({
-        mensaje: 'Usuario creado correctamente.',
-        Usuario: crearUsuario,
-      });
+
+      await nuevoUsuario.save();
+
+      res.status(201).json(formatoRespuesta(true, "Usuario creado correctamente", nuevoUsuario, null));
     }
   } catch (error) {
     console.log(error);
-    return res.status(500).json({
-      mensaje: 'Error interno del servidor.',
-    });
+    res.status(500).json(formatoRespuesta(false, 'Error interno del servidor', null, {
+      code: 500,
+      details: error.message
+    }));
   }
 };
 
@@ -41,35 +46,29 @@ export const login = async (req, res) => {
     const usuarioBuscado = await Usuario.findOne({ correo });
 
     if (!usuarioBuscado) {
-      return res.status(400).json({
-        mensaje: 'El correo es incorrecto',
-      });
+      res.status(400).json(formatoRespuesta(false, 'El usuario no existe', null, {
+        code: 400,
+        details: error.message
+      }));
     }
 
     const claveValida = bcrypt.compareSync(clave, usuarioBuscado.clave);
 
     if (!claveValida) {
-      return res.status(400).json({
-        mensaje: 'La contraseña es incorrecta',
-      });
+      res.status(400).json(formatoRespuesta(false, 'La contraseña es incorrecta', null, {
+        code: 400,
+        details: error.message
+      }));
     }
 
-    const token = await generarJWT(
-      usuarioBuscado._id,
-      usuarioBuscado.correo,
-      usuarioBuscado.rol,
-      usuarioBuscado.nombreCompleto
-    );
+    const token = await generarJWT(usuarioBuscado.correo);
 
-    res.status(200).json({
-      mensaje: 'Los datos del usuario son correctos',
-      correo: correo,
-      token: token,
-    });
+    res.status(200).json(formato(true, "Usuario autenticado", { correo, token}, null));
   } catch (error) {
     console.error(error);
-    res.status(500).json({
-      mensaje: 'Error al intentar iniciar sesión',
-    });
+    res.status(500).json(formatoRespuesta(false, 'Error interno del servidor', null, {
+      code: 500,
+      details: error.message
+    }));
   }
 };

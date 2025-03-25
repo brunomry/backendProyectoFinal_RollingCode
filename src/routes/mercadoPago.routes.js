@@ -1,9 +1,8 @@
 import { Router } from "express";
 import { crearPreferenciaMP } from "../controllers/mercadoPago.controller.js";
 
-const enrutador = Router();
+const routerMP = Router();
 
-enrutador.route('/create-order').post(crearPreferenciaMP);
+routerMP.route('/create-order').post(crearPreferenciaMP);
 
-
-export default enrutador;
+export default routerMP;

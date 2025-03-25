@@ -1,0 +1,26 @@
+h1 {
+  font-size: 45px;
+}
+
+p {
+  font-size: 20px;
+  margin-bottom: 30px;
+}
+
+section {
+  text-align: center;
+}
+
+a {
+  padding: 15px 10px;
+  background-color: #ac491b;
+  color: #fbf8ef;
+  border-radius: 10px;
+  font-size: 20px;
+  text-decoration: none;
+}
+
+footer {
+  text-align: center;
+  margin-top: 80px;
+}

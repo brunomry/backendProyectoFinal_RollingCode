@@ -1,9 +1,8 @@
 import { Router } from "express";
 import { enviarCorreo } from "../controllers/mailer.controller.js";
 
-const enrutador = Router();
+const routerMailer = Router();
 
-enrutador.route('/mailer').post(enviarCorreo)
+routerMailer.route('/mailer').post(enviarCorreo)
 
-
-export default enrutador;
+export default routerMailer;

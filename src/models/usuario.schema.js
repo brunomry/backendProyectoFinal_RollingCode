@@ -5,6 +5,7 @@ const usuarioSchema = new Schema({
     type: String,
     required: true,
     unique: false,
+    trim:true,
     minLength: 7,
     maxLength: 30,
   },
@@ -12,6 +13,7 @@ const usuarioSchema = new Schema({
     type: String,
     required: true,
     unique: true,
+    trim:true,
     minLength: 3,
     maxLength: 265,
     validate: {

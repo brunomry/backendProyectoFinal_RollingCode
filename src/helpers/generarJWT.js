@@ -1,10 +1,11 @@
 import jwt  from "jsonwebtoken";
 import 'dotenv/config';
+import {config} from "../config/config.js"
 
-const generarJWT = async (_id, correo, rol, nombreCompleto)=>{
+const generarJWT = async (correo)=>{
     try {
-        const payload = { _id, correo, rol, nombreCompleto };
-        const token = await jwt.sign(payload, process.env.SECRET_JWT, {
+        const payload = { correo };
+        const token = jwt.sign(payload,config.jwtSecret, {
             expiresIn: '1h'
         });
         return token;

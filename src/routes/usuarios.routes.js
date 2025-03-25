@@ -1,18 +1,22 @@
-import { Router } from 'express';
+import { Router } from "express";
 import {
   crearUsuarioAdmin,
   editarUsuario,
   obtenerUsuario,
   obtenerUsuarios,
-} from '../controllers/usuarios.controller.js';
-import validarJWT from '../helpers/verificarJWT.js';
-import validacionCrearUsuarioAdmin from '../validations/admin.validations.js';
+} from "../controllers/usuarios.controller.js";
+import validarJWT from "../middlewares/jwttoken.middleware.js";
+import { adminValidaciones } from "../validations/auth.validations.js";
+import resultadoValidacion from "../middlewares/validaciones.middleware.js";
+import { idParamValidacion } from "../validations/common.validations.js";
 
-const enrutador = Router();
+const routerUsuario = Router();
 
-enrutador.route('/login').get(obtenerUsuarios);
-enrutador.route('/usuario/:id').post([validarJWT],editarUsuario);
-enrutador.route('/usuario/:id').get(obtenerUsuario);
-enrutador.route('/crearusuario').post([validacionCrearUsuarioAdmin],crearUsuarioAdmin)
+routerUsuario.route("/usuarios").get(obtenerUsuarios);
+routerUsuario
+  .route("/usuario/:id")
+  .post([idParamValidacion, resultadoValidacion, validarJWT], editarUsuario)
+  .get([idParamValidacion, resultadoValidacion], obtenerUsuario);
+routerUsuario.route("/crearusuario").post([idParamValidacion, adminValidaciones, resultadoValidacion], crearUsuarioAdmin);
 
-export default enrutador;
+export default routerUsuario;

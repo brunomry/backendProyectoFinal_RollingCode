@@ -37,18 +37,7 @@ Este proyecto de Backend se integró a su proyecto Frontend correspondiente.
 
 ## Tecnologías Utilizadas
 
-<a href="https://developer.mozilla.org/es/docs/Web/JavaScript"><img src="https://img.icons8.com/color/48/000000/javascript--v1.png" alt="JavaScript (ES6+)" title="JavaScript (ES6+)" width="48" height="48"/></a>
-<a href="https://nodejs.org/"><img src="https://cdn.icon-icons.com/icons2/2415/PNG/512/nodejs_plain_logo_icon_146409.png" alt="Node.js"   title="Node js" width="50"></a>
-<a href="https://www.mongodb.com/"><img src="https://cdn.icon-icons.com/icons2/2415/PNG/512/mongodb_original_wordmark_logo_icon_146425.png" alt="MongoDB" title="MongoDB" width="60"></a>
-<a href="https://mongoosejs.com/"><img src="https://mongoosejs.com/docs/images/mongoose5_62x30_transparent.png" alt="Mongoose" title="Mongoose" width="75"></a>
-
-  * ### Otras:
-
-    - [Express js](https://expressjs.com/es/)
-    - [Express-validator](https://express-validator.github.io/docs/guides/getting-started)
-    - [bcrypt](https://www.npmjs.com/package/bcrypt)
-    - [JWT](https://jwt.io/)
-    - [NodeMailer](https://www.nodemailer.com/)
+Javascript, Node js, MongoDB, Mongoose, Express js, Express-validator, bcrypt, JWT, NodeMailer
 
 ## Endpoints API
 
@@ -62,12 +51,16 @@ Este proyecto de Backend se integró a su proyecto Frontend correspondiente.
     * Endpoint para registrar nuevos usuarios en la aplicación.
 - /api/pedidos
     * Endpoint para visualizar la lista de pedidos realizados por los usuarios.
+- /api/createpedido
+    * Endpoint para crear un pedido
 - /api/pedido/:id
     * Endpoint para obtener información detallada de un pedido específico y para actualizar (PUT) su estado.
 - /api/mailer
     * Endpoint para enviar correos de confirmacion a los usuarios registrados.
-- /api/usuario
-    * Endpoint para editar el estado de los usuarios registrados.
+- /api/usuarios
+    * Endpoint para obtener los usuarios registrados.
+- /api/usuario/:id
+    * Endpoint para obtener un usuario o editar el estado de un usuario registrado.
 - /api/crearusuario
     * Endpoint para crear nuevos usuarios en la aplicación.
 - /api/create-order

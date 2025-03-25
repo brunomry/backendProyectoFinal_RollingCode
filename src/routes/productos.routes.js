@@ -7,11 +7,11 @@ import {
   editarProducto,
 } from '../controllers/productos.controller.js';
 import validacionProducto from '../validations/productos.validations.js';
-import validarJWT from '../helpers/verificarJWT.js';
+import validarJWT from '../middlewares/jwttoken.middleware.js';
 
-const enrutador = Router();
+const routerProducto = Router();
 
-enrutador.route('/productos').get(listarProductos).post([validarJWT,validacionProducto],crearProducto);
-enrutador.route('/producto/:id').get(obtenerProducto).delete([validarJWT],borrarProducto).put([validarJWT,validacionProducto],editarProducto);
+routerProducto.route('/productos').get(listarProductos).post([validarJWT,validacionProducto],crearProducto);
+routerProducto.route('/producto/:id').get(obtenerProducto).delete([validarJWT],borrarProducto).put([validarJWT,validacionProducto],editarProducto);
 
-export default enrutador;
+export default routerProducto;

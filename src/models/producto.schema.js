@@ -6,6 +6,7 @@ const productoSchema = new Schema({
     required: true,
     unique: true,
     minLength: 10,
+    trim:true,
     maxLength: 50,
   },
   precio: {
@@ -27,6 +28,7 @@ const productoSchema = new Schema({
   detalle: {
     type: String,
     required: true,
+    trim:true,
     minLength: 10,
     maxLength: 150,
   },

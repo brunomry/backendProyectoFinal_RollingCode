@@ -11,12 +11,9 @@ import enrutadorPedidos from './src/routes/pedidos.routes.js';
 import enrutadorMailer from "./src/routes/mailer.routes.js"
 import enrutadorMercadoPago from './src/routes/mercadoPago.routes.js'
 import enrutadorAuth from './src/routes/auth.routes.js';
+import { config } from './src/config/config.js';
 
 const app = express();
-app.set('port', process.env.PORT || 4000);
-app.listen(app.get('port'), () => {
-  console.log('Estoy en el puerto ' + app.get('port'));
-});
 
 app.use(cors());
 app.use(morgan());
@@ -27,6 +24,12 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 app.use(express.static(path.join(__dirname, '/public')));
+
+try {
+  app.listen(config.port, () => console.log(`Servidor conectado en el puerto ${config.port}`));
+} catch (error) {
+  console.log(error);
+}
 
 app.use('/api', enrutadorProductos);
 app.use('/api', enrutadorUsuarios);

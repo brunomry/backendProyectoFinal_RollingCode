@@ -17,6 +17,6 @@ routerUsuario
   .route("/usuario/:id")
   .post([idParamValidacion, resultadoValidacion, validarJWT], editarUsuario)
   .get([idParamValidacion, resultadoValidacion], obtenerUsuario);
-routerUsuario.route("/crearusuario").post([idParamValidacion, adminValidaciones, resultadoValidacion], crearUsuarioAdmin);
+routerUsuario.route("/crearusuario").post([adminValidaciones, resultadoValidacion], crearUsuarioAdmin);
 
 export default routerUsuario;

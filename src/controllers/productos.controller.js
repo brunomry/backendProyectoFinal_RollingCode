@@ -4,7 +4,7 @@ import { formatoRespuesta } from "../utils/respuesta.util.js";
 export const listarProductos = async (req, res) =>{
     try{
         const productos = await Producto.find();
-        res.status(200).json(formatoRespuesta(true, "Lista de productos", productos, null));    
+        res.status(200).json(formatoRespuesta(true, "Lista de productos", [...productos], null));    
       }catch(error){
         console.log(error);
         res.status(404).json(formatoRespuesta(false, "No se pudo obtener la lista de productos", null,{

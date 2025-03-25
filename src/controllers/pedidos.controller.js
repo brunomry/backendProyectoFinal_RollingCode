@@ -46,7 +46,7 @@ export const obtenerPedidos = async (req, res) => {
   try {
     const pedidos = await Pedido.find();
 
-    res.status(200).json(formatoRespuesta(true, "Lista de pedidos", pedidos, null));
+    res.status(200).json(formatoRespuesta(true, "Lista de pedidos", [...pedidos], null));
 
   } catch (error) {
     console.log(error);

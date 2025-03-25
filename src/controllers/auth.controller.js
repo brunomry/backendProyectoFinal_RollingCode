@@ -63,7 +63,7 @@ export const login = async (req, res) => {
 
     const token = await generarJWT(usuarioBuscado.correo);
 
-    res.status(200).json(formato(true, "Usuario autenticado", { correo, token}, null));
+    res.status(200).json(formatoRespuesta(true, "Usuario autenticado", { correo, token}, null));
   } catch (error) {
     console.error(error);
     res.status(500).json(formatoRespuesta(false, 'Error interno del servidor', null, {

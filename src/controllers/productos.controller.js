@@ -60,9 +60,7 @@ export const borrarProducto = async (req, res) => {
 
     await Producto.findByIdAndDelete(id, req.body);
 
-    res.status(200).json({
-      mensaje:"El producto fue eliminado con éxito."
-    })
+    res.status(200).json(formatoRespuesta(true, "El producto fue eliminado con éxito", null, null));
 
   } catch (error) {
     console.error(error);

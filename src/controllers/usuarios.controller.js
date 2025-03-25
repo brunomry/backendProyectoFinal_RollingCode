@@ -1,5 +1,6 @@
 import Usuario from "../models/usuario.schema.js";
 import { formatoRespuesta } from "../utils/respuesta.util.js";
+import bcrypt from 'bcrypt';
 
 export const obtenerUsuarios = async (req, res) => {
   try {

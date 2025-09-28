@@ -37,7 +37,7 @@ export const editarUsuario = async (req, res) => {
     if (!usuarioBuscado) {
       res.status(404).json(formatoRespuesta(false, "No se pudo encontrar el usuario", null,{
         code:404,
-        details: error.message
+        details: "No se pudo encontrar el usuario"
       }));
     }
  
@@ -66,7 +66,7 @@ export const crearUsuarioAdmin = async (req, res) => {
     if (correoVerificacion) {
       res.status(400).json(formatoRespuesta(false, 'Este correo ya se encuentra registrado.', null, {
         code: 400,
-        details: error.message
+        details: 'Este correo ya se encuentra registrado.'
       }));
     } 
 
@@ -83,7 +83,14 @@ export const crearUsuarioAdmin = async (req, res) => {
 
     nuevoUsuario.save();
 
-    res.status(201).json(formatoRespuesta(true, "El usuario admin fue creado correctamente", nuevoUsuario, null));
+    const data = {
+        nombreCompleto: nombreCompleto,
+        correo: correo,
+        estado: true,
+        rol: rol,
+    }
+
+    res.status(201).json(formatoRespuesta(true, "El usuario admin fue creado correctamente", data, null));
     
   } catch (error) {
     console.log(error);

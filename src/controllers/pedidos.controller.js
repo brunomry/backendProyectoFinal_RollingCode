@@ -25,7 +25,7 @@ export const editarPedido = async (req,res) => {
     if(!pedidoEncontrado){
       return res.status(404).json(formatoRespuesta(false, "No se pudo editar el estado del Pedido.", null,{
         code:404,
-        details: error.message
+        details: "No se pudo editar el estado del Pedido."
       }));
     }
 

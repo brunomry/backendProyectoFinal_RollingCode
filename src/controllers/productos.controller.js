@@ -54,7 +54,7 @@ export const borrarProducto = async (req, res) => {
     if(!productoEncontrado){
       return res.status(404).json(formatoRespuesta(false, "No se pudo encontrar el producto.", null,{
         code:404,
-        details: error.message
+        details: "No se pudo encontrar el producto."
       }));
     }
 
@@ -79,7 +79,7 @@ export const editarProducto = async(req, res)=>{
     if(!buscarProducto){
       res.status(404).json(formatoRespuesta(false, "No se pudo encontrar el producto", null,{
         code:404,
-        details: error.message
+        details: "No se pudo encontrar el producto"
       }));
     }
 

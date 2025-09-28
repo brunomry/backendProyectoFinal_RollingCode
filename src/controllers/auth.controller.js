@@ -10,11 +10,12 @@ export const crearUsuario = async (req, res) => {
     const correoVerificacion = await Usuario.findOne({ correo: correo });
 
     if (correoVerificacion) {
-      res.status(400).json(formatoRespuesta(false, 'Este correo ya se encuentra registrado.', null, {
+      return res.status(400).json(formatoRespuesta(false, 'Este correo ya se encuentra registrado.', null, {
         code: 400,
-        details: error.message
+        details: 'Este correo ya se encuentra registrado'
       }));
-    } else {
+    }
+    
       const saltos = bcrypt.genSaltSync(10);
       const claveEncriptada = bcrypt.hashSync(clave, saltos);
 
@@ -28,8 +29,18 @@ export const crearUsuario = async (req, res) => {
 
       await nuevoUsuario.save();
 
-      res.status(201).json(formatoRespuesta(true, "Usuario creado correctamente", nuevoUsuario, null));
-    }
+      const token = await generarJWT(nuevoUsuario.correo);
+
+      const data = {
+        nombreCompleto,
+        correo,
+        estado: true,
+        rol: "Usuario",
+        token
+      }
+
+      res.status(201).json(formatoRespuesta(true, "Usuario creado correctamente", data, null));
+    
   } catch (error) {
     console.log(error);
     res.status(500).json(formatoRespuesta(false, 'Error interno del servidor', null, {
@@ -48,7 +59,7 @@ export const login = async (req, res) => {
     if (!usuarioBuscado) {
       res.status(400).json(formatoRespuesta(false, 'El usuario no existe', null, {
         code: 400,
-        details: error.message
+        details: 'El usuario no existe'
       }));
     }
 
@@ -57,7 +68,7 @@ export const login = async (req, res) => {
     if (!claveValida) {
       res.status(400).json(formatoRespuesta(false, 'La contraseña es incorrecta', null, {
         code: 400,
-        details: error.message
+        details: 'La contraseña es incorrecta'
       }));
     }
 
@@ -65,7 +76,8 @@ export const login = async (req, res) => {
 
     const data = {
       correo,
-      token
+      token,
+      rol: usuarioBuscado.rol
     }
 
     res.status(200).json(formatoRespuesta(true, "Usuario autenticado", data, null));

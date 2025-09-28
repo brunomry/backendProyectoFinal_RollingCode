@@ -55,6 +55,7 @@ export const login = async (req, res) => {
     const { correo, clave } = req.body;
 
     const usuarioBuscado = await Usuario.findOne({ correo });
+console.log(usuarioBuscado);
 
     if (!usuarioBuscado) {
       res.status(400).json(formatoRespuesta(false, 'El usuario no existe', null, {
@@ -77,7 +78,7 @@ export const login = async (req, res) => {
     const data = {
       correo,
       token,
-      rol: "Usuario"
+      rol: usuarioBuscado.rol
     }
 
     res.status(200).json(formatoRespuesta(true, "Usuario autenticado", data, null));

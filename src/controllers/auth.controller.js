@@ -77,7 +77,7 @@ export const login = async (req, res) => {
     const data = {
       correo,
       token,
-      rol: usuarioBuscado.rol
+      rol: "Usuario"
     }
 
     res.status(200).json(formatoRespuesta(true, "Usuario autenticado", data, null));

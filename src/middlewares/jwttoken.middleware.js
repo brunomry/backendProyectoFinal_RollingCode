@@ -4,15 +4,26 @@ import { config } from "../config/config.js";
 import { formatoRespuesta } from "../utils/respuesta.util.js";
 
 const validarJWT = (req, res, next) => {
-  const token = req.header("x-token");
+  const authHeader = req.header("Authorization");
 
-  if (!token) {
+  if (!authHeader) {
     return res.status(401).json(
         formatoRespuesta(false, "Se requiere un token", null, {
           code: 401,
-          details: error.message,
+          details: "Falta header Authorization",
         })
       );
+  }
+
+  const [, token] = authHeader.split(" ");
+
+  if (!token) {
+    return res.status(401).json(
+      formatoRespuesta(false, "Token inválido", null, {
+        code: 401,
+        details: "No se encontró token en Authorization",
+      })
+    );
   }
 
   try {

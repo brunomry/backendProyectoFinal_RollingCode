@@ -6,7 +6,7 @@ const generarJWT = async (correo)=>{
     try {
         const payload = { correo };
         const token = jwt.sign(payload,config.jwtSecret, {
-            expiresIn: '1h'
+            expiresIn: '2h'
         });
         return token;
     } catch (error) {

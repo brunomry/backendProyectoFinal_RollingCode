@@ -60,7 +60,7 @@ export const borrarProducto = async (req, res) => {
 
     await Producto.findByIdAndDelete(id, req.body);
 
-    res.status(200).json(formatoRespuesta(true, "El producto fue eliminado con éxito", null, null));
+    res.status(200).json(formatoRespuesta(true, "El producto fue eliminado con éxito", id, null));
 
   } catch (error) {
     console.error(error);
@@ -83,9 +83,9 @@ export const editarProducto = async(req, res)=>{
       }));
     }
 
-    await Producto.findByIdAndUpdate(id, req.body);
+    const productoActualizado = await Producto.findByIdAndUpdate(id, req.body, { new: true });
 
-    res.status(200).json(formatoRespuesta(true, "El producto fue modificado con éxito", null, null));
+    res.status(200).json(formatoRespuesta(true, "El producto fue modificado con éxito", productoActualizado, null));
 
   } catch (error) {
     console.error(error)

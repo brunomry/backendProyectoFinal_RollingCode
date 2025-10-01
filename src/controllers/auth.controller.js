@@ -55,7 +55,6 @@ export const login = async (req, res) => {
     const { correo, clave } = req.body;
 
     const usuarioBuscado = await Usuario.findOne({ correo });
-console.log(usuarioBuscado);
 
     if (!usuarioBuscado) {
       res.status(400).json(formatoRespuesta(false, 'El usuario no existe', null, {
@@ -76,6 +75,7 @@ console.log(usuarioBuscado);
     const token = await generarJWT(usuarioBuscado.correo);
 
     const data = {
+      nombreCompleto: usuarioBuscado.nombreCompleto,
       correo,
       token,
       rol: usuarioBuscado.rol

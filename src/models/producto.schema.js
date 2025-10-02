@@ -7,17 +7,18 @@ const productoSchema = new Schema({
     unique: true,
     minLength: 10,
     trim:true,
-    maxLength: 50,
+    maxLength: 30,
   },
   precio: {
     type: Number,
     required: true,
-    min: 3500,
-    max: 10000,
+    min: 5000,
+    max: 16000,
   },
   imagen: {
     type: String,
     required: true,
+    unique:true,
     validate: {
       validator: function(v){
         return /(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|jpeg|gif|png)/.test(v);
@@ -28,6 +29,7 @@ const productoSchema = new Schema({
   detalle: {
     type: String,
     required: true,
+    unique: true,
     trim:true,
     minLength: 10,
     maxLength: 150,

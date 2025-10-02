@@ -7,11 +7,18 @@ export const crearUsuario = async (req, res) => {
   try {
     const { nombreCompleto, correo, clave } = req.body;
 
+    if (!correo || !clave || !nombreCompleto) {
+    return res.status(400).json(formatoRespuesta(false, "Todos los campos son obligatorios", null, {
+      code: 400,
+      details: "Todos los campos son obligatorios",
+    }));
+  }
+
     const correoVerificacion = await Usuario.findOne({ correo: correo });
 
     if (correoVerificacion) {
-      return res.status(400).json(formatoRespuesta(false, 'Este correo ya se encuentra registrado.', null, {
-        code: 400,
+      return res.status(409).json(formatoRespuesta(false, 'Este correo ya se encuentra registrado.', null, {
+        code: 409,
         details: 'Este correo ya se encuentra registrado'
       }));
     }
@@ -54,6 +61,13 @@ export const login = async (req, res) => {
   try {
     const { correo, clave } = req.body;
 
+     if (!correo || !clave) {
+      return res.status(400).json(formatoRespuesta(false, "Correo y contraseña son obligatorios", null, {
+        code: 400,
+        details: "Correo y contraseña son obligatorios",
+      }));
+    }
+
     const usuarioBuscado = await Usuario.findOne({ correo });
 
     if (!usuarioBuscado) {
@@ -66,8 +80,8 @@ export const login = async (req, res) => {
     const claveValida = bcrypt.compareSync(clave, usuarioBuscado.clave);
 
     if (!claveValida) {
-      res.status(400).json(formatoRespuesta(false, 'La contraseña es incorrecta', null, {
-        code: 400,
+      res.status(401).json(formatoRespuesta(false, 'La contraseña es incorrecta', null, {
+        code: 401,
         details: 'La contraseña es incorrecta'
       }));
     }

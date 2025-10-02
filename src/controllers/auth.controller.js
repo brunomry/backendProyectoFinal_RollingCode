@@ -71,9 +71,9 @@ export const login = async (req, res) => {
     const usuarioBuscado = await Usuario.findOne({ correo });
 
     if (!usuarioBuscado) {
-      res.status(400).json(formatoRespuesta(false, 'El usuario no existe', null, {
-        code: 400,
-        details: 'El usuario no existe'
+      res.status(404).json(formatoRespuesta(false, 'El correo ingresado no se encuentra registrado', null, {
+        code: 404,
+        details: 'El correo ingresado no se encuentra registrado'
       }));
     }
 

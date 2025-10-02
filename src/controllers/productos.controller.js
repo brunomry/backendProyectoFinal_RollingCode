@@ -58,7 +58,7 @@ export const crearProducto = async (req, res) => {
       );
     }
 
-    const nombreProducto = await Usuario.findOne({ nombre: nombre });
+    const nombreProducto = await Producto.findOne({ nombre: nombre });
 
     if (nombreProducto) {
       return res.status(409).json(

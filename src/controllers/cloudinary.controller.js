@@ -3,6 +3,7 @@ import { formatoRespuesta } from "../utils/respuesta.util.js";
 
 export const uploadImage = async (req, res) => {
   try {
+    onsole.log("req.file:", req.file);
     const result = await cloudinary.uploader.upload_stream(
       {
         folder: "app-restaurante",

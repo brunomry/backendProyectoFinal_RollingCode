@@ -12,6 +12,7 @@ import enrutadorMailer from "./src/routes/mailer.routes.js"
 import enrutadorMercadoPago from './src/routes/mercadoPago.routes.js'
 import enrutadorAuth from './src/routes/auth.routes.js';
 import { config } from './src/config/config.js';
+import routerCloudinary from './src/routes/cloudinary.routes.js';
 
 const app = express();
 
@@ -36,4 +37,5 @@ app.use('/api', enrutadorUsuarios);
 app.use('/api', enrutadorAuth);
 app.use('/api', enrutadorPedidos);
 app.use('/api', enrutadorMailer);
-app.use('/api', enrutadorMercadoPago)
+app.use('/api', enrutadorMercadoPago);
+app.use('/api', routerCloudinary);

@@ -4,9 +4,9 @@ const productoValidationes = [
   body("nombre")
     .notEmpty()
     .withMessage("El nombre del producto es obligatorio")
-    .isLength({ min: 10, max: 50 })
+    .isLength({ min: 10, max: 30 })
     .withMessage(
-      "El nombre del producto debe contener entre 10 y 50 carácteres"
+      "El nombre del producto debe contener entre 10 y 30 carácteres"
     ),
   body("precio")
     .notEmpty()
@@ -14,18 +14,18 @@ const productoValidationes = [
     .isNumeric()
     .withMessage("El precio debe ser un número")
     .custom((valor) => {
-      if (valor >= 3500 && valor <= 10000) {
+      if (valor >= 5000 && valor <= 16000) {
         return true;
       } else {
-        throw new Error("El precio debe estar entre $3500 y $10000");
+        throw new Error("El precio debe estar entre $5000 y $16000");
       }
     }),
   body("imagen")
     .notEmpty()
     .withMessage("La imagen del producto es obligatoria")
-    .matches(/(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|jpeg|gif|png)/)
+    .matches(/(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|jpeg|gif|png|webp|avif)$/)
     .withMessage(
-      "La imagen debe tener un formato de URL valida y terminar en jpg|jpeg|gif|png"
+      "La imagen debe tener un formato de URL valida y terminar en jpg|jpeg|gif|png|webp|avif"
     ),
   body("detalle")
     .notEmpty()

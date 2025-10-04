@@ -3,40 +3,51 @@ import { formatoRespuesta } from "../utils/respuesta.util.js";
 
 export const uploadImage = async (req, res) => {
   try {
-    onsole.log("req.file:", req.file);
-    const result = await cloudinary.uploader.upload_stream(
-      {
-        folder: "app-restaurante",
-        transformation: [
-          { width: 800, height: 600, crop: "fill" },
-          { fetch_format: "auto", quality: "auto" },
-        ],
-      },
-      (error, result) => {
-        if (error)
-          return res.status(500).json(
-            formatoRespuesta(false, "Error al subir imagen", null, {
-              code: 500,
-              details: "Error al subir imagen",
-            })
-          );
-        return res.json(
-          formatoRespuesta(
-            true,
-            "Imagen guardada",
-            { url: result.secure_url },
-            null
-          )
-        );
-      }
-    );
+    if (!req.file) {
+      return res.status(400).json(
+        formatoRespuesta(false, "No se envió ningún archivo", null, {
+          code: 400,
+          details: "No se envió ningún archivo",
+        })
+      );
+    }
 
-    req.file.stream.pipe(result);
+    const streamUpload = (req) => {
+      return new Promise((resolve, reject) => {
+        const stream = cloudinary.uploader.upload_stream(
+          {
+            folder: "app-restaurante",
+            transformation: [
+              { width: 800, height: 600, crop: "fill" },
+              { fetch_format: "auto", quality: "auto" },
+            ],
+          },
+          (error, result) => {
+            if (result) resolve(result);
+            else reject(error);
+          }
+        );
+        req.file.stream.pipe(stream);
+      });
+    };
+
+    const result = await streamUpload(req);
+
+    return res.json(
+      formatoRespuesta(
+        true,
+        "Error al subir la imagen",
+        {
+          url: result.secure_url,
+        },
+        null
+      )
+    );
   } catch (error) {
-    res.status(500).json(
-      formatoRespuesta(false, "Error al subir imagen", null, {
-        code: 500,
-        details: error.message,
+    return res.status(500).json(
+      formatoRespuesta(false, "Error al subir la imagen", null, {
+        code: 400,
+        details: "Error al subir la imagen",
       })
     );
   }

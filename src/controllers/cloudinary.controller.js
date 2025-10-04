@@ -2,6 +2,8 @@ import cloudinary from "../config/cloudinary.js";
 import { formatoRespuesta } from "../utils/respuesta.util.js";
 
 export const uploadImage = async (req, res) => {
+  console.log(req.file);
+  
   try {
     if (!req.file) {
       return res.status(400).json(
@@ -18,7 +20,6 @@ export const uploadImage = async (req, res) => {
           {
             folder: "app-restaurante",
             transformation: [
-              { width: 800, height: 600, crop: "fill" },
               { fetch_format: "auto", quality: "auto" },
             ],
           },
@@ -37,9 +38,7 @@ export const uploadImage = async (req, res) => {
       formatoRespuesta(
         true,
         "Error al subir la imagen",
-        {
-          url: result.secure_url,
-        },
+        result,
         null
       )
     );

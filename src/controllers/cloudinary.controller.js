@@ -1,6 +1,5 @@
 import streamifier from "streamifier";
 import cloudinary from "../config/cloudinary.js";
-import { formatoRespuesta } from "../utils/respuesta.util.js";
 
 const streamUpload = (req) => {
   return new Promise((resolve, reject) => {
@@ -18,9 +17,9 @@ const streamUpload = (req) => {
 export const uploadImage = async (req, res) => {
   try {
     const result = await streamUpload(req);
-    res.json(formatoRespuesta(true, "Imagen guardada", { url: result.secure_url }, null));
+    res.json({ url: result.secure_url });
   } catch (error) {
     console.error(error);
-    res.status(500).json(formatoRespuesta(false,"Error al subir imagen", null, { code:500, details: error.message }));
+    res.status(500).json({ message: "Error al subir imagen", details: error.message });
   }
 };

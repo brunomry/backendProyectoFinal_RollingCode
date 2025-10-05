@@ -184,19 +184,19 @@ export const obtenerProductosPorFiltros = async (req, res) => {
     const filtros = {};
 
     if (nombre) {
-      filter.nombre = { $regex: nombre, $options: "i" };
+      filtros.nombre = { $regex: nombre, $options: "i" };
     }
 
     if (categoria) {
-      filter.categoria = categoria;
+      filtros.categoria = categoria;
     }
 
     if (estado) {
-      filter.estado = estado;
+      filtros.estado = estado;
     }
 
     if (precio) {
-      filter.precio = precio;
+      filtros.precio = precio;
     } 
 
     const productos = await Producto.find(filtros);

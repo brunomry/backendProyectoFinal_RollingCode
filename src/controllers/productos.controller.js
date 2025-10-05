@@ -74,7 +74,7 @@ export const crearProducto = async (req, res) => {
       );
     }
 
-     const nuevoProducto = new Producto({
+    const nuevoProducto = new Producto({
       nombre,
       detalle,
       precio,
@@ -174,5 +174,36 @@ export const editarProducto = async (req, res) => {
         details: error.message,
       })
     );
+  }
+};
+
+export const obtenerProductosPorFiltros = async (req, res) => {
+  try {
+    const { search, category, status, price } = req.query;
+
+    const filter = {};
+
+    if (search) {
+      filter.nombre = { $regex: search, $options: "i" };
+    }
+
+    if (category) {
+      filter.categoria = category;
+    }
+
+    if (status) {
+      filter.estado = status;
+    }
+
+    if (price) {
+      filter.precio = price;
+    }
+
+    const products = await Producto.find(filter);
+
+    res.status(200).json({ data: products });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: error.message });
   }
 };

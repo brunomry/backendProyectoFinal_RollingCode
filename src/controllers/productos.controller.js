@@ -179,29 +179,29 @@ export const editarProducto = async (req, res) => {
 
 export const obtenerProductosPorFiltros = async (req, res) => {
   try {
-    const { search, category, status, price } = req.query;
+    const { nombre, categoria, estado, precio } = req.query;
 
-    const filter = {};
+    const filtros = {};
 
-    if (search) {
-      filter.nombre = { $regex: search, $options: "i" };
+    if (nombre) {
+      filter.nombre = { $regex: nombre, $options: "i" };
     }
 
-    if (category) {
-      filter.categoria = category;
+    if (categoria) {
+      filter.categoria = categoria;
     }
 
-    if (status) {
-      filter.estado = status;
+    if (estado) {
+      filter.estado = estado;
     }
 
-    if (price) {
-      filter.precio = price;
-    }
+    if (precio) {
+      filter.precio = precio;
+    } 
 
-    const products = await Producto.find(filter);
-
-    res.status(200).json({ data: products });
+    const productos = await Producto.find(filtros);
+    
+    res.status(200).json({ data: productos });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: error.message });

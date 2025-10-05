@@ -12,7 +12,8 @@ import validarJWT from '../middlewares/jwttoken.middleware.js';
 
 const routerProducto = Router();
 
-routerProducto.route('/productos').get(listarProductos).post([validarJWT,validacionProducto],crearProducto).get(obtenerProductosPorFiltros);
+routerProducto.route('/productos').get(listarProductos).post([validarJWT,validacionProducto],crearProducto);
+routerProducto.route('/productos/filtros').get(obtenerProductosPorFiltros);
 routerProducto.route('/producto/:id').get(obtenerProducto).delete([validarJWT],borrarProducto).put([validarJWT,validacionProducto],editarProducto);
 
 export default routerProducto;
